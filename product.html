@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produto — Brasil Importados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="logo">Brasil<span>Importados</span> 🇧🇷</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="shop.html" class="active">Loja</a></li>
+            <li><a href="live.html">Ao Vivo</a></li>
+            <li><a href="about.html">Sobre</a></li>
+            <li><a href="contact.html">Contato</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="cart-btn" onclick="openCart()">
+                🛒
+                <span class="cart-badge hidden">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- PRODUCT DETAIL -->
+<section class="section product-detail">
+    <div class="container">
+        <a href="shop.html" style="color: var(--text-muted); font-size: 0.88rem; display: inline-flex; align-items: center; gap: 6px; margin-bottom: 32px;">
+            ← Voltar à loja
+        </a>
+        <div class="product-detail-grid" id="product-detail">
+            <!-- Filled by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- RELATED PRODUCTS -->
+<section class="section" style="background: var(--surface); border-top: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Você também pode gostar</div>
+        <div class="section-title">Produtos relacionados</div>
+        <div class="products-grid" id="related-products">
+            <!-- Filled by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Brasil<span>Importados</span> 🇧🇷</div>
+                <p>Produtos internacionais com procedência, garantia e preço justo.</p>
+            </div>
+            <div>
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="shop.html">Loja</a></li>
+                    <li><a href="live.html">Lives</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Categorias</h4>
+                <ul>
+                    <li><a href="shop.html?cat=electronics">Eletrônicos</a></li>
+                    <li><a href="shop.html?cat=beauty">Beleza</a></li>
+                    <li><a href="shop.html?cat=fashion">Moda</a></li>
+                    <li><a href="shop.html?cat=home">Casa</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">WhatsApp</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Brasil Importados. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- CART OVERLAY + SIDEBAR -->
+<div class="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-sidebar">
+    <div class="cart-header">
+        🛒 Seu Carrinho
+        <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items">
+        <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            <p>Seu carrinho está vazio</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-subtotal">
+            <span>Subtotal:</span>
+            <span class="cart-subtotal-value">R$ 0</span>
+        </div>
+        <p class="cart-note">Frete calculado no checkout. Entrega em 15-25 dias úteis.</p>
+        <button class="btn btn-primary" style="width: 100%;" onclick="finalizeCart()">
+            Finalizar pelo WhatsApp 📱
+        </button>
+    </div>
+</div>
+
+<script src="products.js"></script>
+<script src="main.js"></script>
+<script>
+    (function() {
+        const params = new URLSearchParams(window.location.search);
+        const id = parseInt(params.get('id') || '1');
+        const product = getProductById(id);
+        const related = getRelatedProducts(id, 4);
+
+        if (!product) {
+            document.getElementById('product-detail').innerHTML =
+                '<p>Produto não encontrado. <a href="shop.html" style="color:var(--gold)">Voltar à loja</a></p>';
+        } else {
+            document.title = `${product.name} — Brasil Importados`;
+            const discount = product.originalPrice
+                ? Math.round((1 - product.price / product.originalPrice) * 100)
+                : 0;
+
+            document.getElementById('product-detail').innerHTML = `
+                <div class="product-gallery">
+                    <img src="${product.image}" alt="${product.name}" class="product-main-img">
+                </div>
+                <div class="product-info">
+                    ${product.badge ? `<span class="product-badge" style="display:inline-block; margin-bottom:12px;">${product.badge}</span>` : ''}
+                    <div class="product-card-category">${product.category}</div>
+                    <h1>${product.name}</h1>
+                    <div class="product-rating">
+                        <span class="star">★</span> ${product.rating}
+                        <span class="text-muted">(${product.reviews} avaliações)</span>
+                    </div>
+                    <div class="product-detail-price">
+                        <span class="price-current-lg">${formatPrice(product.price)}</span>
+                        ${product.originalPrice ? `<span class="price-old-lg">${formatPrice(product.originalPrice)}</span>` : ''}
+                        ${discount > 0 ? `<span class="price-discount">-${discount}%</span>` : ''}
+                    </div>
+                    <p class="product-description">${product.description}</p>
+                    <div class="product-actions">
+                        <div class="qty-selector" style="display:inline-flex; align-items:center; gap:10px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:6px 14px;">
+                            <span>Qtd:</span>
+                            <button class="qty-btn" onclick="window._pd_qty = Math.max(1, (window._pd_qty||1) - 1); document.getElementById('pd-qty').textContent = window._pd_qty;">−</button>
+                            <span id="pd-qty" style="min-width:24px; text-align:center; font-weight:600;">1</span>
+                            <button class="qty-btn" onclick="window._pd_qty = (window._pd_qty||1) + 1; document.getElementById('pd-qty').textContent = window._pd_qty;">+</button>
+                        </div>
+                        <button class="btn btn-primary btn-lg" onclick="addToCart(${product.id}, window._pd_qty || 1)">
+                            Adicionar ao carrinho 🛒
+                        </button>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 24px;">
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted);">
+                            <span>✅</span> Original, importado dos EUA
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted);">
+                            <span>🚚</span> Entrega em 15-25 dias úteis
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: var(--text-muted);">
+                            <span>🔄</span> 30 dias de garantia
+                        </div>
+                    </div>
+                </div>`;
+        }
+
+        document.getElementById('related-products').innerHTML =
+            related.map(p => renderProductCard(p)).join('');
+        setActiveNav();
+    })();
+</script>
+</body>
+</html>

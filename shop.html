@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja — Brasil Importados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="logo">Brasil<span>Importados</span> 🇧🇷</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="shop.html" class="active">Loja</a></li>
+            <li><a href="live.html">Ao Vivo</a></li>
+            <li><a href="about.html">Sobre</a></li>
+            <li><a href="contact.html">Contato</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="cart-btn" onclick="openCart()">
+                🛒
+                <span class="cart-badge hidden">0</span>
+            </button>
+            <a href="shop.html" class="btn btn-primary btn-sm">Ver Loja</a>
+        </div>
+    </div>
+</nav>
+
+<!-- SHOP HEADER -->
+<section style="padding: 48px 0 0; border-bottom: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Nossa loja</div>
+        <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 32px;">
+            <div>
+                <h1 style="font-size: 2.4rem; font-weight: 900; letter-spacing: -1px;">Todos os Produtos</h1>
+                <p class="text-muted" style="margin-top: 4px;">Escolha seus favoritos. Entrega para todo o Brasil.</p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+                <span class="text-muted" style="font-size: 0.85rem;">Ordenar:</span>
+                <select id="sort-select" onchange="renderShop()" style="background: var(--surface); border: 1px solid var(--border); color: var(--text); padding: 8px 14px; border-radius: 8px; font-size: 0.85rem; cursor: pointer;">
+                    <option value="default">Padrão</option>
+                    <option value="price-asc">Menor preço</option>
+                    <option value="price-desc">Maior preço</option>
+                    <option value="rating">Melhor avaliado</option>
+                </select>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- SHOP CONTENT -->
+<section class="section" style="padding-top: 40px;">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 220px 1fr; gap: 40px; align-items: start;">
+
+            <!-- SIDEBAR FILTERS -->
+            <div style="position: sticky; top: 100px;">
+                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px;">
+                    <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 16px;">Categorias</h3>
+                    <div class="filter-tabs" style="flex-direction: column; gap: 6px;" id="category-filters">
+                        <!-- Filled by JS -->
+                    </div>
+                </div>
+
+                <div style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-top: 20px;">
+                    <h3 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 12px;">🔎 Busca rápida</h3>
+                    <input type="text" id="search-input" class="form-input" placeholder="Nome do produto..." oninput="renderShop()">
+                </div>
+
+                <div style="background: linear-gradient(135deg, rgba(230,168,23,0.08), rgba(26,138,74,0.05)); border: 1px solid rgba(230,168,23,0.2); border-radius: var(--radius); padding: 20px; margin-top: 20px; text-align: center;">
+                    <div style="font-size: 1.5rem; margin-bottom: 8px;">🎥</div>
+                    <h4 style="font-size: 0.9rem; margin-bottom: 6px;">Lives toda quinta!</h4>
+                    <p style="font-size: 0.78rem; color: var(--text-muted); margin-bottom: 12px;">Produtos com até 40% de desconto</p>
+                    <a href="live.html" class="btn btn-primary btn-sm" style="width: 100%;">Ver agenda →</a>
+                </div>
+            </div>
+
+            <!-- PRODUCT GRID -->
+            <div>
+                <div id="product-count" style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 20px;"></div>
+                <div class="products-grid" id="shop-products">
+                    <!-- Filled by JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section newsletter">
+    <div class="container">
+        <div class="section-label">Fique por dentro</div>
+        <div class="section-title">Receba ofertas exclusivas</div>
+        <form class="newsletter-form" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Enviado ✓'; this.querySelector('button').style.background='var(--green)';">
+            <input type="text" class="newsletter-input" placeholder="Seu nome" required>
+            <input type="email" class="newsletter-input" placeholder="Seu melhor e-mail" required>
+            <button type="submit" class="btn btn-primary">Quero receber!</button>
+        </form>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Brasil<span>Importados</span> 🇧🇷</div>
+                <p>Produtos internacionais com procedência, garantia e preço justo.</p>
+                <div class="footer-socials">
+                    <a href="#" class="footer-social">📸</a>
+                    <a href="#" class="footer-social">📘</a>
+                    <a href="#" class="footer-social">📱</a>
+                    <a href="#" class="footer-social">▶️</a>
+                </div>
+            </div>
+            <div>
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="shop.html">Loja</a></li>
+                    <li><a href="live.html">Lives</a></li>
+                    <li><a href="about.html">Sobre</a></li>
+                    <li><a href="contact.html">Contato</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Categorias</h4>
+                <ul>
+                    <li><a href="shop.html?cat=electronics">Eletrônicos</a></li>
+                    <li><a href="shop.html?cat=beauty">Beleza</a></li>
+                    <li><a href="shop.html?cat=fashion">Moda</a></li>
+                    <li><a href="shop.html?cat=home">Casa</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">WhatsApp</a></li>
+                    <li><a href="#">Instagram</a></li>
+                    <li><a href="#">E-mail</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Brasil Importados. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- CART OVERLAY + SIDEBAR -->
+<div class="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-sidebar">
+    <div class="cart-header">
+        🛒 Seu Carrinho
+        <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items">
+        <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            <p>Seu carrinho está vazio</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-subtotal">
+            <span>Subtotal:</span>
+            <span class="cart-subtotal-value">R$ 0</span>
+        </div>
+        <p class="cart-note">Frete calculado no checkout. Entrega em 15-25 dias úteis.</p>
+        <button class="btn btn-primary" style="width: 100%;" onclick="finalizeCart()">
+            Finalizar pelo WhatsApp 📱
+        </button>
+    </div>
+</div>
+
+<script src="products.js"></script>
+<script src="main.js"></script>
+<script>
+    let activeCategory = 'all';
+    let searchQuery = '';
+
+    function renderShop() {
+        const sort = document.getElementById('sort-select').value;
+        searchQuery = document.getElementById('search-input').value.toLowerCase();
+
+        let filtered = products.filter(p => {
+            const matchCat = activeCategory === 'all' || p.category === activeCategory;
+            const matchSearch = !searchQuery || p.name.toLowerCase().includes(searchQuery) || p.description.toLowerCase().includes(searchQuery);
+            return matchCat && matchSearch;
+        });
+
+        // Sort
+        if (sort === 'price-asc') filtered.sort((a, b) => a.price - b.price);
+        else if (sort === 'price-desc') filtered.sort((a, b) => b.price - a.price);
+        else if (sort === 'rating') filtered.sort((a, b) => b.rating - a.rating);
+
+        document.getElementById('product-count').textContent =
+            `Mostrando ${filtered.length} de ${products.length} produtos`;
+        document.getElementById('shop-products').innerHTML =
+            filtered.map(p => renderProductCard(p)).join('');
+    }
+
+    function setCategory(cat) {
+        activeCategory = cat;
+        document.querySelectorAll('.filter-tab').forEach(t => {
+            t.classList.toggle('active', t.dataset.cat === cat);
+        });
+        renderShop();
+    }
+
+    // Init
+    (function init() {
+        // Category filter tabs
+        document.getElementById('category-filters').innerHTML = categories.map(cat =>
+            `<button class="filter-tab ${cat.id === 'all' ? 'active' : ''}"
+                     data-cat="${cat.id}"
+                     onclick="setCategory('${cat.id}')">${cat.label}</button>`
+        ).join('');
+
+        // Check URL param for category
+        const params = new URLSearchParams(window.location.search);
+        const catParam = params.get('cat');
+        if (catParam) setCategory(catParam);
+
+        renderShop();
+        setActiveNav();
+    })();
+</script>
+</body>
+</html>

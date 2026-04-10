@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato — Brasil Importados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="logo">Brasil<span>Importados</span> 🇧🇷</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="shop.html">Loja</a></li>
+            <li><a href="live.html">Ao Vivo</a></li>
+            <li><a href="about.html">Sobre</a></li>
+            <li><a href="contact.html" class="active">Contato</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="cart-btn" onclick="openCart()">
+                🛒
+                <span class="cart-badge hidden">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- CONTACT HERO -->
+<section style="padding: 80px 0 60px; border-bottom: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Fale conosco</div>
+        <h1 style="font-size: 2.6rem; font-weight: 900; letter-spacing: -1px; margin-bottom: 12px;">Como podemos ajudar?</h1>
+        <p style="color: var(--text-muted); font-size: 1rem; max-width: 500px;">
+            Responde em até 2 horas durante o horário comercial (9h-18h, segunda a sexta).
+        </p>
+    </div>
+</section>
+
+<!-- CONTACT CONTENT -->
+<section class="section">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px;">
+
+            <!-- CONTACT FORM -->
+            <div>
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 24px;">Envie uma mensagem</h2>
+                <form onsubmit="event.preventDefault(); handleFormSubmit(this);">
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                        <div class="form-group">
+                            <label class="form-label">Seu nome</label>
+                            <input type="text" class="form-input" placeholder="Maria Silva" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">WhatsApp</label>
+                            <input type="tel" class="form-input" placeholder="(11) 99999-9999" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Assunto</label>
+                        <select class="form-input" required>
+                            <option value="">Selecione...</option>
+                            <option>Tenho uma dúvida sobre um produto</option>
+                            <option>Quero saber o status do meu pedido</option>
+                            <option>Problema com o pagamento</option>
+                            <option>Solicitar troca ou devolução</option>
+                            <option>Quero ser fornecedor</option>
+                            <option>Outro assunto</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Mensagem</label>
+                        <textarea class="form-input" placeholder="Escreva sua mensagem aqui..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-lg" style="width: 100%;">
+                        Enviar mensagem 📩
+                    </button>
+                </form>
+            </div>
+
+            <!-- CONTACT INFO -->
+            <div>
+                <h2 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 24px;">Canais diretos</h2>
+
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/5511999999999" target="_blank" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; gap: 16px; align-items: center; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--green)'" onmouseout="this.style.borderColor='var(--border)'">
+                        <div style="width: 52px; height: 52px; background: rgba(37,211,102,0.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">💬</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1rem; margin-bottom: 2px;">WhatsApp</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">Resposta em até 2h • (11) 99999-9999</div>
+                        </div>
+                        <div style="margin-left: auto; color: var(--green-light); font-size: 0.85rem;">Conversar →</div>
+                    </a>
+
+                    <!-- Instagram -->
+                    <a href="#" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; gap: 16px; align-items: center; transition: border-color 0.2s;" onmouseover="this.style.borderColor='#E1306C'" onmouseout="this.style.borderColor='var(--border)'">
+                        <div style="width: 52px; height: 52px; background: rgba(225,48,108,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📸</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1rem; margin-bottom: 2px;">Instagram</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">@brasilimportados</div>
+                        </div>
+                        <div style="margin-left: auto; color: #E1306C; font-size: 0.85rem;">Seguir →</div>
+                    </a>
+
+                    <!-- Email -->
+                    <a href="mailto:contato@brasilimportados.com.br" style="background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; display: flex; gap: 16px; align-items: center; transition: border-color 0.2s;" onmouseover="this.style.borderColor='var(--gold)'" onmouseout="this.style.borderColor='var(--border)'">
+                        <div style="width: 52px; height: 52px; background: rgba(230,168,23,0.12); border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">📧</div>
+                        <div>
+                            <div style="font-weight: 700; font-size: 1rem; margin-bottom: 2px;">E-mail</div>
+                            <div style="color: var(--text-muted); font-size: 0.85rem;">contato@brasilimportados.com.br</div>
+                        </div>
+                        <div style="margin-left: auto; color: var(--gold); font-size: 0.85rem;">Enviar →</div>
+                    </a>
+                </div>
+
+                <!-- FAQ -->
+                <div style="margin-top: 40px;">
+                    <h3 style="font-size: 1rem; font-weight: 700; margin-bottom: 16px;">Perguntas frequentes</h3>
+                    <div style="display: flex; flex-direction: column; gap: 10px;">
+                        <a href="#" style="color: var(--text-muted); font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                            Quanto tempo demora a entrega? →
+                        </a>
+                        <a href="#" style="color: var(--text-muted); font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                            Como funciona a garantia? →
+                        </a>
+                        <a href="#" style="color: var(--text-muted); font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                            Posso devolver um produto? →
+                        </a>
+                        <a href="#" style="color: var(--text-muted); font-size: 0.88rem; display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px solid var(--border);">
+                            Como rastreio meu pedido? →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Brasil<span>Importados</span> 🇧🇷</div>
+                <p>Produtos internacionais com procedência, garantia e preço justo.</p>
+            </div>
+            <div>
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="shop.html">Loja</a></li>
+                    <li><a href="live.html">Lives</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Categorias</h4>
+                <ul>
+                    <li><a href="shop.html?cat=electronics">Eletrônicos</a></li>
+                    <li><a href="shop.html?cat=beauty">Beleza</a></li>
+                    <li><a href="shop.html?cat=fashion">Moda</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">WhatsApp</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Brasil Importados. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- CART OVERLAY + SIDEBAR -->
+<div class="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-sidebar">
+    <div class="cart-header">
+        🛒 Seu Carrinho
+        <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items">
+        <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            <p>Seu carrinho está vazio</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-subtotal">
+            <span>Subtotal:</span>
+            <span class="cart-subtotal-value">R$ 0</span>
+        </div>
+        <p class="cart-note">Frete calculado no checkout. Entrega em 15-25 dias úteis.</p>
+        <button class="btn btn-primary" style="width: 100%;" onclick="finalizeCart()">
+            Finalizar pelo WhatsApp 📱
+        </button>
+    </div>
+</div>
+
+<script src="products.js"></script>
+<script src="main.js"></script>
+<script>
+    function handleFormSubmit(form) {
+        const btn = form.querySelector('button[type="submit"]');
+        btn.textContent = '✅ Enviado! Entraremos em contato em breve.';
+        btn.style.background = 'var(--green)';
+        btn.disabled = true;
+    }
+    setActiveNav();
+</script>
+</body>
+</html>

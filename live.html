@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lives — Brasil Importados</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+    <div class="navbar-inner">
+        <a href="index.html" class="logo">Brasil<span>Importados</span> 🇧🇷</a>
+        <ul class="nav-links">
+            <li><a href="index.html">Início</a></li>
+            <li><a href="shop.html">Loja</a></li>
+            <li><a href="live.html" class="active">Ao Vivo</a></li>
+            <li><a href="about.html">Sobre</a></li>
+            <li><a href="contact.html">Contato</a></li>
+        </ul>
+        <div class="nav-actions">
+            <button class="cart-btn" onclick="openCart()">
+                🛒
+                <span class="cart-badge hidden">0</span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- LIVE HERO -->
+<section class="live-hero">
+    <div class="container">
+        <div class="live-badge">
+            <span class="dot"></span>
+            🔴 LIVE AGORA
+        </div>
+        <h1 style="font-size: 2.4rem; font-weight: 900; margin-bottom: 16px;">Vendas ao Vivo</h1>
+        <p style="color: var(--text-muted); max-width: 520px; margin: 0 auto;">
+            Toda quinta-feira às 20h reunimos os melhores produtos com descontos exclusivos. Participe, pergunte, e garanta o seu.
+        </p>
+
+        <!-- COUNTDOWN -->
+        <div class="countdown" id="countdown" style="margin-top: 32px;"></div>
+        <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 16px;">Próxima live em:</p>
+
+        <div style="margin-top: 28px;">
+            <a href="#" class="btn btn-green btn-lg" onclick="event.preventDefault(); this.textContent='🔔 Você será notificado!'; this.style.background='var(--green-light)';">
+                🔔 Avisar-me no WhatsApp
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- NEXT LIVE CARD -->
+<section class="section">
+    <div class="container">
+        <div class="section-label">Próxima live</div>
+        <div class="section-title" id="next-live-title">Fashion & Lifestyle</div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center; max-width: 900px; margin: 32px auto 0; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;">
+            <img id="next-live-img" src="" alt="" style="width: 100%; height: 100%; object-fit: cover; min-height: 280px;">
+            <div style="padding: 32px;">
+                <div style="font-size: 0.82rem; color: var(--gold); font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;" id="next-live-date"></div>
+                <h2 id="next-live-name" style="font-size: 1.6rem; font-weight: 800; margin-bottom: 12px;"></h2>
+                <p id="next-live-desc" style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6;"></p>
+                <h4 style="font-size: 0.82rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Produtos em destaque:</h4>
+                <div class="live-products-row" id="next-live-products"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- PAST LIVES -->
+<section class="section" style="background: var(--surface); border-top: 1px solid var(--border);">
+    <div class="container">
+        <div class="section-label">Histórico</div>
+        <div class="section-title">Lives anteriores</div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;" id="past-lives">
+            <!-- Filled by JS -->
+        </div>
+    </div>
+</section>
+
+<!-- HOW LIVES WORK -->
+<section class="section">
+    <div class="container">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+            <div>
+                <div class="section-label">Como funciona</div>
+                <div class="section-title">Lives exclusivas</div>
+                <p style="color: var(--text-muted); margin-bottom: 28px; line-height: 1.7;">
+                    Toda quinta-feira hacemos uma live especial com productos selecionados, descuentos únicos, y la oportunidad de comprar en tiempo real.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 16px;">
+                    <div style="display: flex; gap: 14px; align-items: flex-start;">
+                        <div style="width: 36px; height: 36px; background: rgba(230,168,23,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem;">📱</div>
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;">Você assiste pelo Instagram</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Transmissão ao vivo pelo nosso Instagram. Comente, pergunte, interaja.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 14px; align-items: flex-start;">
+                        <div style="width: 36px; height: 36px; background: rgba(230,168,23,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem;">💬</div>
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;">Compre em tempo real</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Os produtos são anunciados na live. Reserve o seu pelo WhatsApp na hora.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 14px; align-items: flex-start;">
+                        <div style="width: 36px; height: 36px; background: rgba(230,168,23,0.15); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 1rem;">🎁</div>
+                        <div>
+                            <h4 style="font-size: 0.95rem; font-weight: 600; margin-bottom: 4px;">Sorteios e promoções</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-muted);">Todos os participantes concorrem a prêmios. Sorteios toda live!</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="background: linear-gradient(135deg, rgba(230,168,23,0.08), rgba(26,138,74,0.06)); border: 1px solid rgba(230,168,23,0.2); border-radius: var(--radius); padding: 36px; text-align: center;">
+                <div style="font-size: 3rem; margin-bottom: 16px;">📅</div>
+                <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Toda quinta-feira</h3>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 24px;">Horário: 20h (Brasília)</p>
+                <a href="#" class="btn btn-primary" style="width: 100%;" onclick="event.preventDefault(); this.textContent='✓ Calendário adicionado!';">
+                    📅 Adicionar ao calendário
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-grid">
+            <div class="footer-brand">
+                <div class="logo">Brasil<span>Importados</span> 🇧🇷</div>
+                <p>Produtos internacionais com procedência, garantia e preço justo.</p>
+            </div>
+            <div>
+                <h4>Navegação</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="shop.html">Loja</a></li>
+                    <li><a href="live.html">Lives</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Contato</h4>
+                <ul>
+                    <li><a href="#">WhatsApp</a></li>
+                    <li><a href="#">Instagram</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Brasil Importados. Todos os direitos reservados.</p>
+        </div>
+    </div>
+</footer>
+
+<!-- CART OVERLAY + SIDEBAR -->
+<div class="cart-overlay" onclick="closeCart()"></div>
+<div class="cart-sidebar">
+    <div class="cart-header">
+        🛒 Seu Carrinho
+        <button class="cart-close" onclick="closeCart()">✕</button>
+    </div>
+    <div class="cart-items">
+        <div class="cart-empty">
+            <div class="cart-empty-icon">🛒</div>
+            <p>Seu carrinho está vazio</p>
+        </div>
+    </div>
+    <div class="cart-footer">
+        <div class="cart-subtotal">
+            <span>Subtotal:</span>
+            <span class="cart-subtotal-value">R$ 0</span>
+        </div>
+        <p class="cart-note">Frete calculado no checkout. Entrega em 15-25 dias úteis.</p>
+        <button class="btn btn-primary" style="width: 100%;" onclick="finalizeCart()">
+            Finalizar pelo WhatsApp 📱
+        </button>
+    </div>
+</div>
+
+<script src="products.js"></script>
+<script src="main.js"></script>
+<script>
+    (function() {
+        // Countdown to next live (next Thursday 20:00 BRT)
+        function getNextThursday() {
+            const now = new Date();
+            const thursday = new Date(now);
+            thursday.setDate(now.getDate() + ((4 + 7 - now.getDay()) % 7 || 7));
+            thursday.setHours(22, 0, 0, 0); // 20:00 BRT = UTC-3
+            if (thursday <= now) thursday.setDate(thursday.getDate() + 7);
+            return thursday;
+        }
+        const nextLive = getNextThursday();
+        initCountdown(nextLive, 'countdown');
+
+        // Next live
+        const upcoming = liveSales.find(l => l.status === 'upcoming');
+        if (upcoming) {
+            const productNames = upcoming.featuredProducts.map(id => {
+                const p = products.find(pr => pr.id === id);
+                return p ? `<span class="live-product-chip">${p.name}</span>` : '';
+            }).join('');
+            const date = new Date(upcoming.date + 'T' + upcoming.time);
+            document.getElementById('next-live-title').textContent = upcoming.title;
+            document.getElementById('next-live-name').textContent = upcoming.title;
+            document.getElementById('next-live-desc').textContent = upcoming.description;
+            document.getElementById('next-live-date').textContent =
+                `📅 ${date.toLocaleDateString('pt-BR', { weekday: 'long', day: 'numeric', month: 'long' })} às ${upcoming.time}`;
+            document.getElementById('next-live-img').src = upcoming.image;
+            document.getElementById('next-live-products').innerHTML = productNames;
+        }
+
+        // Past lives
+        const past = liveSales.filter(l => l.status === 'past');
+        document.getElementById('past-lives').innerHTML = past.map(live => {
+            const date = new Date(live.date);
+            const productNames = live.featuredProducts.map(id => {
+                const p = products.find(pr => pr.id === id);
+                return p ? p.name : '';
+            }).filter(Boolean);
+            return `
+                <div class="live-card">
+                    <img src="${live.image}" alt="${live.title}" class="live-card-img">
+                    <div class="live-card-body">
+                        <div class="live-card-date">📅 ${date.toLocaleDateString('pt-BR', { day: 'numeric', month: 'long' })}</div>
+                        <h3>${live.title}</h3>
+                        <p>${live.description}</p>
+                        <div class="live-products-row">
+                            ${productNames.slice(0,3).map(n => `<span class="live-product-chip">${n}</span>`).join('')}
+                        </div>
+                        <button class="btn btn-outline btn-sm" style="margin-top:14px; width:100%;" onclick="this.textContent='✅ Reassistido!'">
+                            ▶️ Reassistir highlights
+                        </button>
+                    </div>
+                </div>`;
+        }).join('');
+
+        setActiveNav();
+    })();
+</script>
+</body>
+</html>
